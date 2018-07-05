@@ -1,0 +1,62 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+        <Schema
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="TestProject.TestODataService">
+            <EntityType Name="SPRTBLType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="CODE" Type="Edm.String" Nullable="false" MaxLength="32"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="MASTTBL_SPR" Relationship="TestProject.TestODataService.SPRTBL_MASTERTBLType" FromRole="SPRTBLPrincipal" ToRole="MASTERTBLDependent"/>
+            </EntityType>
+            <EntityType Name="MASTERTBLType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="CODE" Type="Edm.String" MaxLength="32"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="255"/>
+                <Property Name="NUM" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <Property Name="DT" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="SPRID" Type="Edm.Int32"/>
+                <NavigationProperty Name="MASTTBL_SPR" Relationship="TestProject.TestODataService.SPRTBL_MASTERTBLType" FromRole="MASTERTBLDependent" ToRole="SPRTBLPrincipal"/>
+            </EntityType>
+            <EntityType Name="TESTTBLType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false" DefaultValue="1"/>
+                <Property Name="CODE" Type="Edm.String" MaxLength="32"/>
+                <Property Name="NUM" Type="Edm.Decimal" Precision="12" Scale="2"/>
+            </EntityType>
+            <Association Name="SPRTBL_MASTERTBLType">
+                <End Type="TestProject.TestODataService.SPRTBLType" Role="SPRTBLPrincipal" Multiplicity="1"/>
+                <End Type="TestProject.TestODataService.MASTERTBLType" Role="MASTERTBLDependent" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="SPRTBLPrincipal">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="MASTERTBLDependent">
+                        <PropertyRef Name="SPRID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="TestODataService" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="SPRTBL" EntityType="TestProject.TestODataService.SPRTBLType"/>
+                <EntitySet Name="MASTERTBL" EntityType="TestProject.TestODataService.MASTERTBLType"/>
+                <EntitySet Name="TESTTBL" EntityType="TestProject.TestODataService.TESTTBLType"/>
+                <AssociationSet Name="SPRTBL_MASTERTBL" Association="TestProject.TestODataService.SPRTBL_MASTERTBLType">
+                    <End Role="SPRTBLPrincipal" EntitySet="SPRTBL"/>
+                    <End Role="MASTERTBLDependent" EntitySet="MASTERTBL"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

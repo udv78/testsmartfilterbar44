@@ -1,0 +1,218 @@
+{
+	"_version": "1.4.0",
+	"sap.app": {
+		"id": "smartfilterbar44",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/TestProject/TestODataService.xsodata/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml",
+					"annotations": [
+						"localAnnotations",
+						"annotation1"
+					]
+				}
+			},
+			"localAnnotations": {
+				"uri": "localService/metadata.xml",
+				"type": "ODataAnnotation",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"annotation1": {
+				"type": "ODataAnnotation",
+				"uri": "annotations/annotation1.xml",
+				"settings": {
+					"localUri": "annotations/annotation1.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "sap.ui.ui5-template-plugin.1worklist",
+			"version": "1.38.3"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://task",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "smartfilterbar44.view.App",
+			"type": "XML",
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.38.0",
+			"libs": {
+				"sap.ui.core": {
+					"minVersion": "1.38.0"
+				},
+				"sap.m": {
+					"minVersion": "1.38.0"
+				}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "smartfilterbar44.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true
+			},
+			"@i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "smartfilterbar44.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": [
+						"notFound"
+					]
+				},
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "menu",
+					"target": [
+						"menu"
+					]
+				},
+				{
+					"pattern": "worklist",
+					"name": "worklist",
+					"target": [
+						"worklist"
+					]
+				},
+				{
+					"pattern": "mastertbl",
+					"name": "mastertbl",
+					"target": [
+						"mastertbl"
+					]
+				},				
+				{
+					"pattern": "SPRTBL/{objectId}",
+					"name": "object",
+					"target": [
+						"object"
+					]
+				},
+				{
+					"pattern": "addMASTERTBL",
+					"name": "addMASTERTBL",
+					"target": [
+						"addMASTERTBL"
+					]
+				},
+				{
+					"pattern": "MASTERTBL/{objectId}",
+					"name": "mastertblobj",
+					"target": [
+						"mastertblobj"
+					]
+				},
+				{
+					"pattern": "MASTERTBL_U/{objectId}",
+					"name": "editMASTERTBL",
+					"target": [
+						"editMASTERTBL"
+					]
+				} 
+			],
+			"targets": {
+				"menu": {
+					"viewName": "Menu",
+					"viewId": "menu",
+					"viewLevel": 1,
+					"title": "Меню"
+				},
+				"worklist": {
+					"viewName": "Worklist",
+					"viewId": "worklist",
+					"viewLevel": 1,
+					"title": "{i18n>worklistViewTitle}"
+				},
+				"object": {
+					"viewName": "Object",
+					"viewId": "object",
+					"viewLevel": 2
+				},
+				"objectNotFound": {
+					"viewName": "ObjectNotFound",
+					"viewId": "objectNotFound"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
+				},
+				"mastertbl": {
+					"viewName": "Mastertbl",
+					"viewId": "mastertbl",
+					"viewLevel": 1,
+					"title": "MasterTbl"
+				},
+				"mastertblobj": {
+					"viewName": "MastertblObj",
+					"viewId": "mastertblobj",
+					"viewLevel": 2,
+					"title": "mastertblobj"
+				},
+				"addMASTERTBL": {
+					"viewName": "AddMASTERTBL",
+					"viewId": "AddMASTERTBL",
+					"viewLevel": 3
+				},
+				"editMASTERTBL": {
+					"viewName": "EditMASTERTBL",
+					"viewId": "EditMASTERTBL",
+					"viewLevel": 3
+				} 				
+			}
+		}
+	}
+}
