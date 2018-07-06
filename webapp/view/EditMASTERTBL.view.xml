@@ -2,6 +2,7 @@
 	controllerName="smartfilterbar44.controller.EditMASTERTBL"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"
+	xmlns:core="sap.ui.core"
 	xmlns="sap.m"
 	xmlns:smartfield="sap.ui.comp.smartfield"
 	xmlns:smartform="sap.ui.comp.smartform">
@@ -66,6 +67,19 @@
 			</smartform:SmartForm>
 			<Input id="idsprid" showValueHelp="true" valueHelpOnly="true" value="{path : 'SPRID', formatter : '.formatsprid'}" />
 			<Input id="idsprid2" value="{SPRID}" />
+			<Input id="idsprid3" value="{SPRID}" 
+			  textFormatMode="KeyValue"
+			  showSuggestion="true"
+				showValueHelp="true"
+				valueHelpRequest="handleValueHelp"
+				suggestionItems="{/SPRTBL}"
+				suggestionItemSelected="suggestionItemSelected"
+				placeholder="Для тестов"
+				>
+				<suggestionItems>
+					<core:ListItem key="{ID}" text="{CODE}" additionalText="{NAME}" />
+				</suggestionItems>
+			</Input>
 		</semantic:content>	
 		<semantic:saveAction>
 			<semantic:SaveAction id="save" press="onSave"/>

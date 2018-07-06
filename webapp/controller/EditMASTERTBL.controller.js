@@ -2,11 +2,14 @@ sap.ui.define([
 	"smartfilterbar44/controller/BaseController",
 	"sap/ui/core/routing/History",
 	"sap/m/MessageToast",
-	"sap/m/Input"
-], function(BaseController, History, MessageToast, Input) {
+	"sap/m/Input",
+	'sap/ui/model/Filter',
+	'sap/ui/core/Fragment',
+], function(BaseController, History, MessageToast, Input, Filter, Fragment) {
 	"use strict";
-
+	
 	return BaseController.extend("smartfilterbar44.controller.EditMASTERTBL", {
+		inputId: '',
 
 		/* =========================================================== */
 		/* lifecycle methods                                           */
@@ -30,10 +33,10 @@ sap.ui.define([
 			var i = input.getInnerControls()[0];
 			if (i){
 				alert("to be setTextFormatter");
-				debugger;
+				//debugger;
 				i.mBindingInfos.value.formatter = function() {
 					console.log("i.mBindingInfos.value.formatter  executed");
-					debugger;
+					//debugger;
 					return "909";
 				};
 				i.setTextFormatter(".formatsprid");
@@ -44,8 +47,15 @@ sap.ui.define([
 				
 			};
 			var i2=oView.byId("idsprid2");
-
+			i2.setTextFormatter(".formatsprid");
 			
+			i2.mBindingInfos.value.formatter = function() {
+					console.log("i2.mBindingInfos.value.formatter  executed");
+					//debugger;
+					return "101";
+				};
+			debugger;
+			//i2.setValue("555");
 		},
 		
 		formatsprid: function(aSrpid) {
@@ -69,7 +79,7 @@ sap.ui.define([
 			 });
 			 
 			var Model=this.getView() .getModel();
-			debugger;
+			//debugger;
 			
 			
 			this.getRouter().getRoute("editMASTERTBL").attachPatternMatched(this._onObjectMatched, this);
@@ -90,15 +100,75 @@ sap.ui.define([
 			value: {
 			parts: [{path: "SPRID"}],
 				  	formatter: function(sCost){
-				  		debugger;
+				  		//debugger;
 				  		return "789";
 				  	}
 				}
 			});
 			oView.byId("page").addContent(oInput);
 			
-			debugger;
+			//debugger;
 		},
+		
+		handleValueHelp : function (oEvent) {
+			var sInputValue = oEvent.getSource().getValue();
+
+			this.inputId = oEvent.getSource().getId();
+			// create value help dialog
+			if (!this._valueHelpDialog) {
+				this._valueHelpDialog = sap.ui.xmlfragment(
+					"smartfilterbar44.view.Dialog",
+					this
+				);
+				this.getView().addDependent(this._valueHelpDialog);
+			}
+
+			// create a filter for the binding
+			this._valueHelpDialog.getBinding("items").filter([new Filter(
+				"ID",
+				sap.ui.model.FilterOperator.Contains, sInputValue
+			)]);
+
+			// open value help dialog filtered by the input value
+			this._valueHelpDialog.open(sInputValue);
+		},
+		
+		_handleValueHelpSearch : function (evt) {
+			var sValue = evt.getParameter("value");
+			var oFilter = new Filter(
+				"ID",
+				sap.ui.model.FilterOperator.Contains, sValue
+			);
+			evt.getSource().getBinding("items").filter([oFilter]);
+		},		
+		
+		
+		_handleValueHelpClose : function (evt) {
+			var oSelectedItem = evt.getParameter("selectedItem");
+			if (oSelectedItem) {
+				var productInput = this.getView().byId(this.inputId),
+					//oText = this.getView().byId('selectedKey'),
+					sDescription = oSelectedItem.getDescription();
+
+			alert("sDescription=" + sDescription);
+			debugger;
+
+				productInput.setSelectedKey(sDescription);
+				//oText.setText(sDescription);
+			}
+			evt.getSource().getBinding("items").filter([]);
+		},
+
+		suggestionItemSelected: function (evt) {
+
+			var oItem = evt.getParameter('selectedItem'),
+				oText = this.getView().byId('selectedKey'),
+				sKey = oItem ? oItem.getKey() : '';
+			alert ("oText="+ oText + "sKey="+sKey);
+			debugger;
+			oText.setText(sKey);
+		},
+		
 		
 		_onObjectMatched : function (oEvent) {
 			var sObjectId =  oEvent.getParameter("arguments").objectId;
