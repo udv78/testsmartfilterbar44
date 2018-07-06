@@ -15,8 +15,12 @@ sap.ui.define([
 					return "";
 				}
 				return parseFloat(sValue).toFixed(2);
+			},
+			
+			formatsprid : function(aSprid){
+				alert("formatter.formatsprid");
+				return "123";
 			}
-
 		};
 
 	}

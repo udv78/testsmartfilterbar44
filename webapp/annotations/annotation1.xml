@@ -40,9 +40,9 @@
 			</Annotations>
 			<Annotations Target="TestProject.TestODataService.MASTERTBLType/SPRID">
 				<Annotation Term="Core.Description" String="CODE"/>
-				<Annotation Term="Common.Text" String="CODE">
+				<Annotation Term="Common.Text" String="CODE" Path="/MASTTBL_SPR/CODE">
 					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
-				</Annotation>	
+				</Annotation>
 				<Annotation Term="Common.ValueList">
 					<Record>
 						<PropertyValue Property="CollectionPath" String="SPRTBL"/>
@@ -80,6 +80,7 @@
 			<Annotations Target="TestProject.TestODataService.TestODataService/SPRTBL">
 				<Annotation Term="Core.Description" String="CODE"/>
 			</Annotations>
+			<Annotations Target="TestProject.TestODataService.SPRTBLType"/>
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>

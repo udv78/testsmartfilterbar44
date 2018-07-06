@@ -11,7 +11,7 @@
                 <Key>
                     <PropertyRef Name="ID"/>
                 </Key>
-                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="32"/>
                 <Property Name="CODE" Type="Edm.String" Nullable="false" MaxLength="32"/>
                 <Property Name="NAME" Type="Edm.String" MaxLength="255"/>
                 <NavigationProperty Name="MASTTBL_SPR" Relationship="TestProject.TestODataService.SPRTBL_MASTERTBLType" FromRole="SPRTBLPrincipal" ToRole="MASTERTBLDependent"/>
@@ -25,7 +25,7 @@
                 <Property Name="NAME" Type="Edm.String" MaxLength="255"/>
                 <Property Name="NUM" Type="Edm.Decimal" Precision="10" Scale="2"/>
                 <Property Name="DT" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="SPRID" Type="Edm.Int32"/>
+                <Property Name="SPRID" Type="Edm.String" MaxLength="32"/>
                 <NavigationProperty Name="MASTTBL_SPR" Relationship="TestProject.TestODataService.SPRTBL_MASTERTBLType" FromRole="MASTERTBLDependent" ToRole="SPRTBLPrincipal"/>
             </EntityType>
             <EntityType Name="TESTTBLType">

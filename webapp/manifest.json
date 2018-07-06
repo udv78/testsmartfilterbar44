@@ -92,6 +92,9 @@
 			},
 			"": {
 				"dataSource": "mainService",
+				"settings": {
+					"defaultBindingMode": "TwoWay"
+				},
 				"preload": true
 			},
 			"@i18n": {

@@ -1,0 +1,77 @@
+<mvc:View
+	controllerName="smartfilterbar44.controller.EditMASTERTBL"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns="sap.m"
+	xmlns:smartfield="sap.ui.comp.smartfield"
+	xmlns:smartform="sap.ui.comp.smartform">
+	<semantic:FullscreenPage
+		id="page"
+		title="{i18n>editSPRTBLPageTitle}"
+		showNavButton="true"
+		navButtonPress="onNavBack">
+		<semantic:content>
+			<smartform:SmartForm
+				id="form"
+				editable="true"
+				title="{i18n>formSPRTBLTitle}"
+				class="sapUiResponsiveMargin"
+				entityType="/MASTERTBL">
+				<smartform:Group
+					id="formGroup"
+					label="{i18n>formSPRTBLGroupLabel}">
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="codeField"
+							value="{CODE}"
+							textLabel="{i18n>SPRTBLCodeLabel}"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="nameField"
+							value="{NAME}"
+							textLabel="{i18n>SPRTBLNameLabel}"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="numField"
+							value="{NUM}"
+							textLabel="Число"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="dtField"
+							value="{DT}"
+							textLabel="Дата"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="sprtblField"
+							value="{SPRID}"
+							textLabel="SPR TBL"
+							showValueHelp="true"
+							fetchValueListReadOnly="true"
+							expandNavigationProperties="true"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="sprcode"
+							value="{MASTTBL_SPR/CODE}"
+							textLabel="SPR CODE"
+							showValueHelp="true"
+							fetchValueListReadOnly="true"
+							expandNavigationProperties="true"/>
+					</smartform:GroupElement>
+				</smartform:Group>
+			</smartform:SmartForm>
+			<Input id="idsprid" showValueHelp="true" valueHelpOnly="true" value="{path : 'SPRID', formatter : '.formatsprid'}" />
+			<Input id="idsprid2" value="{SPRID}" />
+		</semantic:content>	
+		<semantic:saveAction>
+			<semantic:SaveAction id="save" press="onSave"/>
+		</semantic:saveAction>
+		<semantic:cancelAction>
+			<semantic:CancelAction id="cancel" press="onCancel"/>
+		</semantic:cancelAction>		
+	</semantic:FullscreenPage>
+</mvc:View>
