@@ -4,7 +4,8 @@ sap.ui.define([
 	"sap/m/MessageToast",
 	"sap/m/Input",
 	'sap/ui/model/Filter',
-	'sap/ui/core/Fragment',
+	'sap/ui/core/Fragment'
+	
 ], function(BaseController, History, MessageToast, Input, Filter, Fragment) {
 	"use strict";
 	
@@ -152,6 +153,8 @@ sap.ui.define([
 
 			alert("sDescription=" + sDescription);
 			debugger;
+			
+			  //productInput.setTextFormatMode("Key");
 
 				productInput.setSelectedKey(sDescription);
 				//oText.setText(sDescription);
@@ -162,11 +165,11 @@ sap.ui.define([
 		suggestionItemSelected: function (evt) {
 
 			var oItem = evt.getParameter('selectedItem'),
-				oText = this.getView().byId('selectedKey'),
+				//oText = this.getView().byId('selectedKey'),
 				sKey = oItem ? oItem.getKey() : '';
 			alert ("oText="+ oText + "sKey="+sKey);
 			debugger;
-			oText.setText(sKey);
+		//	oText.setText(sKey);
 		},
 		
 		
