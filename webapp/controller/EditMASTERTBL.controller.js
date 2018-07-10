@@ -59,9 +59,16 @@ sap.ui.define([
 			//i2.setValue("555");
 		},
 		
-		formatsprid: function(aSrpid) {
+		formatsprid: function(aSprid) {
 		//	alert("formatsprid");
-			return "321";
+			var oView = this.getView();
+			var input = oView.byId("idsprid3");
+			alert("formatsprid "+aSprid);
+			if (aSprid && input) {
+				var oModel=input.getModel();
+				return oModel.getData("/SPRTBL('"+aSprid+"')").CODE; 
+			}
+			return "";
 		},
 
 		/* =========================================================== */
@@ -125,10 +132,10 @@ sap.ui.define([
 			}
 
 			// create a filter for the binding
-			this._valueHelpDialog.getBinding("items").filter([new Filter(
+		/*this._valueHelpDialog.getBinding("items").filter([new Filter(
 				"ID",
 				sap.ui.model.FilterOperator.Contains, sInputValue
-			)]);
+			)]);*/
 
 			// open value help dialog filtered by the input value
 			this._valueHelpDialog.open(sInputValue);
@@ -149,7 +156,10 @@ sap.ui.define([
 			if (oSelectedItem) {
 				var productInput = this.getView().byId(this.inputId),
 					//oText = this.getView().byId('selectedKey'),
-					sDescription = oSelectedItem.getDescription();
+					sDescription = oSelectedItem.getDescription(),
+					sTitle = oSelectedItem.getTitle();
+				productInput.getBinding("value").sMode="OneWay";
+				productInput.getBinding("value").setValue(sDescription);
 
 			alert("sDescription=" + sDescription);
 			debugger;
@@ -157,6 +167,7 @@ sap.ui.define([
 			  //productInput.setTextFormatMode("Key");
 
 				productInput.setSelectedKey(sDescription);
+				productInput.setValue(sTitle);
 				//oText.setText(sDescription);
 			}
 			evt.getSource().getBinding("items").filter([]);
@@ -167,7 +178,7 @@ sap.ui.define([
 			var oItem = evt.getParameter('selectedItem'),
 				//oText = this.getView().byId('selectedKey'),
 				sKey = oItem ? oItem.getKey() : '';
-			alert ("oText="+ oText + "sKey="+sKey);
+			alert ( "sKey="+sKey);
 			debugger;
 		//	oText.setText(sKey);
 		},

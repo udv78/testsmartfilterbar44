@@ -67,12 +67,10 @@
 			</smartform:SmartForm>
 			<Input id="idsprid" showValueHelp="true" valueHelpOnly="true" value="{path : 'SPRID', formatter : '.formatsprid'}" />
 			<Input id="idsprid2" value="{SPRID}" />
-			<Input id="idsprid3" value="{SPRID}" 
+			<Input id="idsprid3" value="{path: 'SPRID' , formatter : '.formatsprid'}" 
 			  showSuggestion="true"
 				showValueHelp="true"
 				valueHelpRequest="handleValueHelp"
-				suggestionItems="{/SPRTBL}"
-				suggestionItemSelected="suggestionItemSelected"
 				valueHelpOnly = "true"
 				placeholder="Для тестов"
 				textFormatMode="Key"
